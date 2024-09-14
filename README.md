@@ -1,1 +1,1 @@
-# product-lims-backend
+# starter Project NodeJs with Typescipt + Mongo + Graphql
