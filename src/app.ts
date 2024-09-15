@@ -1,13 +1,16 @@
 import express, { NextFunction, Request, Response } from 'express';
 import http from 'http';
 import https from 'https';
-import {ApolloServer} from '@apollo/server';
-import {expressMiddleware}  from '@apollo/server/express4';
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
 import fs from 'fs';
 import cors from 'cors';
 import mongoose from 'mongoose';
 import { typeDefs } from './graphql/schema';
 import { resolvers } from './graphql/resolver';
+import apiRoutes from "./routes/index.route"
+import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger_output.json';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -26,14 +29,17 @@ app.use(
 
 app.use(express.json({ limit: '3mb' }));
 
+app.use('/api/v1', apiRoutes);
+
 app.get('/', (req: Request, res: Response) => {
   return res.json({
     message: 'server running successfully',
   });
 });
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use((err: any, req: Request, res: Response, next: NextFunction) => {});
+app.use((err: any, req: Request, res: Response, next: NextFunction) => { });
 
 async function startApplication() {
   await mongoose.connect(mongoDBURL, {});

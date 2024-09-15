@@ -1,11 +1,12 @@
 {
-    "watch": [
-      "src",
-      ".env"
-    ],
-    "ext": "ts",
-    "ignore": [
-      "src/**/*.spec.ts"
-    ],
-    "exec": "ts-node  --transpile-only ./src/app.ts"
-  }
+  "watch": [
+    "src",
+    ".env",
+    "nodemon.json"
+  ],
+  "ext": "ts",
+  "ignore": [
+    "src/**/*.spec.ts"
+  ],
+  "exec": "ts-node  --transpile-only ./src/app.ts"
+}
